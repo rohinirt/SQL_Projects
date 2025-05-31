@@ -17,7 +17,9 @@ The primary objective of this project is to detect anomalies and potentially fra
 
 The dataset consists of five interrelated tables:
 
-![ER Diagram](ER Diagram.png)
+![ER_Diagram](https://github.com/user-attachments/assets/669fa89d-105c-4cc5-accc-37ab2ae4e509)
+
+(ER_Diagram.png)
 
 ### 1. `trans`
 
