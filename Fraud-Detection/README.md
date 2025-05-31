@@ -46,7 +46,7 @@ The dataset consists of five interrelated tables:
 
 * `id_merchant_category`: Unique identifier for merchant category
 * `category_name`: Category name (e.g., Groceries, Travel, Electronics)
-![ER Diagram](er_diagram.png)
+(er_diagram.png)
 
 
 ## Conclusion
