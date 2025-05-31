@@ -17,6 +17,8 @@ The primary objective of this project is to detect anomalies and potentially fra
 
 The dataset consists of five interrelated tables:
 
+![ER Diagram](ER Diagram.png)
+
 ### 1. `trans`
 
 * `id`: Unique transaction identifier
