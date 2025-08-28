@@ -1,9 +1,9 @@
-# YouTube Top 200 Trending Videos Analysis Project
+# YouTube Top 200 Trending Videos Analysis
 
-## 📖 Project Overview
+## Project Overview
 This project demonstrates an end-to-end data pipeline for analyzing YouTube's top 200 trending videos. It involves collecting real-time data using YouTube's API, storing it in a MySQL database, and performing comprehensive analysis to uncover insights about video performance, content categories, and viewer engagement patterns. The goal is to understand what makes videos trend in India.
 
-## 🎯 Business & Analytical Objectives
+## Business & Analytical Objectives
 The project aims to answer key questions that are crucial for content creators, marketers, and platform analysts:
 
 - **Performance Analysis:** Which videos and channels are performing best in terms of views and engagement?  
@@ -12,14 +12,14 @@ The project aims to answer key questions that are crucial for content creators, 
 - **Audience Behavior:** What is the relationship between likes, comments, and views?  
 - **Content Optimization:** What are the characteristics of top-performing videos in each category?  
 
-## 🛠️ Technical Skills Demonstrated
+## Technical Skills Demonstrated
 - **API Integration:** Using Google's YouTube Data API v3 to fetch real-time data.  
 - **Python Programming:** Data collection, cleaning, and preprocessing with pandas and google-api-python-client.  
 - **Database Management:** Designing a SQL table schema and performing ETL (Extract, Transform, Load) operations into MySQL.  
 - **SQL Analysis:** Writing complex SQL queries including aggregations, joins, CTEs, window functions, and conditional logic.  
 - **Data Analysis:** Deriving actionable insights from raw data to answer business questions.  
 
-## 📊 Dataset Description
+## Dataset Description
 The dataset contains **200 trending videos** from the Indian region (`regionCode='IN'`), collected via the YouTube API. Each record includes:
 
 - **Identifiers:** video_id, channel_id, channel_title  
@@ -27,7 +27,7 @@ The dataset contains **200 trending videos** from the Indian region (`regionCode
 - **Metadata:** published_at, duration, definition (HD/SD), caption (boolean)  
 - **Engagement Metrics:** view_count, like_count, dislike_count, favorite_count, comment_count  
 
-## 🔄 Project Workflow (Step-by-Step)
+## Project Workflow (Step-by-Step)
 
 ### **1. Data Collection (Youtube_data_collection.ipynb)**
 - Set up a project in the Google Cloud Console and obtained an API key.  
@@ -67,12 +67,12 @@ Performed a multi-faceted analysis using SQL, which can be categorized as follow
 - **Complex Conditional Logic:** Used a `CASE` statement to classify videos into Low, Medium, and High viewership tiers and then aggregated them.  
 - **String Manipulation:** Parsed the ISO 8601 duration field (e.g., `PT2H22M16S`) to calculate average video length per category in minutes—a non-trivial task that demonstrates problem-solving skills.  
 
-## 📈 Key Insights
+## Key Insights
 - **Most Popular Category:** Music 
 - **Engagement vs. Views:** People and Blogs has the highest like-to-view ratio  
 - **Content Volume:** No channel has more than 1 trending videos in top 200 
 - **Video Quality:** A significant majority of trending videos are in HD, highlighting production quality's importance.  
 
-## 📝 Conclusion
+## Conclusion
 This project successfully demonstrates the entire data analysis lifecycle, from collecting raw data from a live API to storing it and performing analysis. The SQL queries go beyond simple filters and aggregates, utilizing advanced techniques to derive meaningful insights that can directly inform content strategy and platform understanding. It showcases strong technical proficiency in Python, SQL, and data manipulation, making it a valuable asset for any data analytics portfolio.
 
