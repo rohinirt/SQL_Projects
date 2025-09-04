@@ -3,7 +3,7 @@
 ## Project Overview
 This project demonstrates an end-to-end data pipeline for analyzing YouTube's top 200 trending videos. It involves collecting real-time data using YouTube's API, storing it in a MySQL database, and performing comprehensive analysis to uncover insights about video performance, content categories, and viewer engagement patterns. The goal is to understand what makes videos trend in India.
 
-## Business & Analytical Objectives
+## Business Objectives
 The project aims to answer key questions that are crucial for content creators, marketers, and platform analysts:
 
 - **Performance Analysis:** Which videos and channels are performing best in terms of views and engagement?  
@@ -12,22 +12,22 @@ The project aims to answer key questions that are crucial for content creators, 
 - **Audience Behavior:** What is the relationship between likes, comments, and views?  
 - **Content Optimization:** What are the characteristics of top-performing videos in each category?  
 
-## Technical Skills Demonstrated
-- **API Integration:** Using Google's YouTube Data API v3 to fetch real-time data.  
-- **Python Programming:** Data collection, cleaning, and preprocessing with pandas and google-api-python-client.  
-- **Database Management:** Designing a SQL table schema and performing ETL (Extract, Transform, Load) operations into MySQL.  
-- **SQL Analysis:** Writing complex SQL queries including aggregations, joins, CTEs, window functions, and conditional logic.  
-- **Data Analysis:** Deriving actionable insights from raw data to answer business questions.  
+## Tools and Technologies
+- **API Integration:** Google's YouTube Data API v3 to fetch real-time data.  
+- **Python:** Data collection, cleaning, and preprocessing with pandas and google-api-python-client.  
+- **Database Management:** Designed a SQL table schema and performed ETL (Extract, Transform, Load) operations into MySQL.  
+- **MySQL Workbench:** Writing complex SQL queries including aggregations, joins, CTEs, window functions, and conditional logic.  
+- **Data Analysis:** Derived actionable insights from raw data to answer business questions.  
 
-## Dataset Description
-The dataset contains **200 trending videos** from the Indian region (`regionCode='IN'`), collected via the YouTube API. Each record includes:
+## Dataset
+The collected dataset contains top **200 trending videos** from the Indian region (`regionCode='IN'`), collected via the YouTube API. Each record includes:
 
 - **Identifiers:** video_id, channel_id, channel_title  
 - **Content Details:** title, description, tags, category_id, category_name  
 - **Metadata:** published_at, duration, definition (HD/SD), caption (boolean)  
 - **Engagement Metrics:** view_count, like_count, dislike_count, favorite_count, comment_count  
 
-## Project Workflow (Step-by-Step)
+## Methods
 
 ### **1. Data Collection (Youtube_data_collection.ipynb)**
 - Set up a project in the Google Cloud Console and obtained an API key.  
