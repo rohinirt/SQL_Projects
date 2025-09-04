@@ -20,9 +20,6 @@ The analysis uses two primary datasets:
 
 The datasets are linked via the district name and state information to enable comprehensive analysis of census data.
 
-## Conclusion
-This analysis reveals critical demographic patterns such as population distribution, growth dynamics, literacy levels, and sex ratios across Indian states and districts. It highlights states with high literacy and growth rates as well as those with demographic challenges. The results can support policymakers and researchers in planning and implementing targeted development initiatives.
-
 ## Functions Used
 - `SELECT`
 - `JOIN`
@@ -36,4 +33,8 @@ This analysis reveals critical demographic patterns such as population distribut
 - Filtering Conditions - `WHERE`
 - String Matching - `LIKE`
 - `DISTINCT`
+  
+## Conclusion
+This analysis reveals critical demographic patterns such as population distribution, growth dynamics, literacy levels, and sex ratios across Indian states and districts. It highlights states with high literacy and growth rates as well as those with demographic challenges. The results can support policymakers and researchers in planning and implementing targeted development initiatives.
+
 
