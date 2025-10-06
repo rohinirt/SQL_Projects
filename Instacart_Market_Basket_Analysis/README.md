@@ -80,6 +80,7 @@ GROUP BY p.product_name
 ORDER BY total_orders DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/1.png)
 
 **Q2: Is there a pattern in orders throughout the week? Which days are popular for orders?**
 ``` sql
@@ -90,6 +91,7 @@ FROM orders
 GROUP BY order_dow
 ORDER BY total_orders DESC;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/2.png)
 
 **Q3: What are the top products most commonly added to the cart first?**
 ``` sql
@@ -103,6 +105,7 @@ GROUP BY p.product_name
 ORDER BY frequency DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/3.png)
 
 **Q4: How many unique products are typically included in a single order?**
 ``` sql
@@ -117,6 +120,7 @@ FROM (
   GROUP BY o.order_id
 ) AS order_summary;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/4.png)
 
 **Q5: What is the average “product diversity” (distinct products bought) per customer?**
 ``` sql
@@ -135,6 +139,7 @@ SELECT
   MAX(products) AS max_products
 FROM unique_products;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/5.png)
 
 **Q6:For each customer, calculate their first and last order number, total number of orders placed, and average days between orders.Then, identify the top 10 customers with the highest total orders**
 ``` sql
@@ -150,6 +155,7 @@ GROUP BY user_id
 ORDER BY total_orders DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/6.png)
 
 **Q7: Inactive customers: Identify customers who stopped ordering after fewer than 5 orders**
 ``` sql
@@ -164,6 +170,8 @@ SELECT
   COUNT(user_id) AS customers_with_fewer_than_5_orders
 FROM customers;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/7.png)
+
 **Q8: Calculate the products reorder rate by cart position bucket (1–5, 6–10, >10)** 
 ``` sql
 SELECT
@@ -177,6 +185,7 @@ FROM order_products
 GROUP BY cart_position_bucket
 ORDER BY cart_position_bucket;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/8.png)
 
 **Q9: Peak order hours: For each day of week, find the top 3 hours with maximum order volume**
 ``` sql
@@ -197,6 +206,7 @@ FROM peak_hours
 WHERE hour_rank <= 3
 ORDER BY order_dow, orders DESC;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/9.png)
 
 **Q10: Basket size trend: calculate average basket size (distinct products) by order_number**
 ``` sql
@@ -217,6 +227,7 @@ FROM basket_sizes
 GROUP BY order_number
 ORDER BY order_number;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/10.png)
 
 **Q11: Most reordered products: products with highest reorder rate (%) excluding low-frequency products (min 100 orders)**
 ``` sql
@@ -232,6 +243,7 @@ HAVING COUNT(*) >= 100
 ORDER BY reorder_rate_pct DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/11.png)
 
 **Q12: Find the top product pairs that are ordered together frequently***
 ``` sql
@@ -264,7 +276,6 @@ LEFT JOIN products pb ON pb.product_id = pc.product_b
 ORDER BY pc.pair_order_count DESC
 LIMIT 10;
 ```
-
 (Alternative/efficient) Q12b: Top product pairs using array aggregation + generate_subscripts
 ``` sql
 WITH order_product_arrays AS (
@@ -308,6 +319,7 @@ LEFT JOIN products pb ON pb.product_id = pc.product_b
 ORDER BY pc.pair_order_count DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/12.png)
 
 **Q13: Calculate the RFM segmentation of users
 Recency = last order_number (higher means more recent),
@@ -341,6 +353,7 @@ FROM user_rfm
 ORDER BY frequency DESC
 LIMIT 20;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/13.png)
 
 **Q14: Customer loyalty distribution: Find the % of users whose reorder_rate > 70%**
 ``` sql
@@ -374,6 +387,7 @@ SELECT
 FROM users_over_70 u
 CROSS JOIN total_users t;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/14.png)
 
 **Q15: Product reorder ranking: top 5 products by reorder probability within each department**
 ``` sql
@@ -397,6 +411,7 @@ FROM product_rank
 WHERE rnk <= 3
 ORDER BY department, rnk;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/15.png) 
 
 **Q16: Calculate top 10% customers by lifetime volume by total products ordered per user**
 ``` sql
@@ -422,6 +437,7 @@ FROM user_percentile
 WHERE pct_rank_asc >= 0.90 
 ORDER BY total_products DESC;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/16.png)
 
 **Q17: Find customers who buy from more than 5 different departments in a single order**
 ``` sql
@@ -448,6 +464,7 @@ FROM orders_dept
 ORDER BY dept_count DESC
 LIMIT 100;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/17.png)
 
 **Q18: Is there any difference in orders in Organic and Inorganic products?**
 ``` sql
@@ -468,6 +485,7 @@ FROM product_type
 GROUP BY product_type
 ORDER BY total_product_orders DESC;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/18.png)
 
 **Q19: Which Aiscles are most pouplar among frequent customers?**
 ``` sql
@@ -489,6 +507,7 @@ GROUP BY a.aisle
 ORDER BY total_orders_by_loyal_customers DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/19.png)
 
 **Q20. What percentage of total orders does each aisle contribute?**
 ``` sql
@@ -503,6 +522,7 @@ GROUP BY a.aisle
 ORDER BY percent_of_total_orders DESC
 LIMIT 10;
 ```
+![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/20.png)
 
 ## Insights
 ## Recommendations
