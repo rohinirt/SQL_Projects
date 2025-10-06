@@ -15,7 +15,8 @@ Instacart is an on-demand grocery and household goods delivery and pickup servic
 The objective of this analysis is to uncover actionable insights from Instacart’s order and product data to support data-driven business decisions. By analyzing customer purchase patterns, product performance, and ordering behavior, this project aims to identify loyal customers, understand retention trends, and highlight high-performing and underperforming product categories. The findings will help optimize product placement, tailor marketing campaigns, design loyalty offers, and improve customer experience by making the shopping journey more personalized and convenient.
 
 ## Dataset Overview
-The database used in the project is as follows:  
+The database used in the project is as follows: 
+
 ``order_products``: Links orders to the products purchased.  
 ``orders``:  Contains order-level data such as order time, day of week, and user ID.  
 ``products``: Product-level details including aisle and department.  
@@ -27,7 +28,7 @@ The database used in the project is as follows:
 Find the dataset [here](https://www.kaggle.com/datasets/psparks/instacart-market-basket-analysis)
 
 ## Tools and Techniques
-**Database**: Postgre SQL
+**Database**: Postgre SQL  
 **Querying Tool**: pgAdmin4
 
 ## Project Structure
@@ -80,7 +81,7 @@ CREATE TABLE order_products (
 ### 3) Data Analysis
 20 Business questions were solved to performa analysis and find actionable insights
 
-**Q1: WHich are the top 10 selling products?**
+**Q1: Which are the top 10 selling products?**
 ``` sql
 SELECT
   p.product_name,
