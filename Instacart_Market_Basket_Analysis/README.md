@@ -1,7 +1,7 @@
 # Instacart Market Baseket Analysis
 ## Table of Contents
 1) [Introduction](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#introduction)
-2) [Objective]([Obejective](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#objective)
+2) [Objective](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#objective)
 3) [Dataset Overview](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#dataset-overview)
 4) [Tools and Techniques](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#tools-and-techniques)
 5) [Project Structure](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#project-structure)
@@ -588,3 +588,6 @@ Most pairs are fruit combinations, reflecting consumer interest in healthy meal 
 ### **13. Department-Level Insights**  
 **Insight**: Fresh Fruits and Fresh Vegetables contribute to nearly 20% of total orders, whereas Bakery items account for just **1.8%.**  
 **Recommendation**: Strengthen supplier partnerships for high-performing departments. Offer promotions and visibility boosts for low-performing ones like Bakery.
+
+## Conclusion
+This analysis provided valuable insights into customer purchasing behavior, product performance, and ordering patterns on the Instacart platform. By examining order frequency, product diversity, and reorder trends, we identified high-performing categories such as fruits and vegetables, as well as customer segments with strong brand loyalty. Insights like peak ordering days, top-selling and frequently paired products, and department-wise demand patterns can guide marketing, inventory, and recommendation strategies. Overall, this project demonstrates how SQL-based data exploration can transform raw transactional data into actionable business intelligence to enhance customer retention, optimize product availability, and improve overall sales performance.
