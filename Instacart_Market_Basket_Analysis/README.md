@@ -1,11 +1,16 @@
 # Instacart Market Baseket Analysis
+## Table of Contents
+1) [Introduction](Introduction)
+2) [Objective](Obejective)
+3) [Dataset Overview](Dataset-Overview)
+
 ## Introduction
 Instacart is an on-demand grocery and household goods delivery and pickup services from a variety of retailers. The process is driven by its app, where customers select items from local stores and a personal shopper, who is an independent contractor, then hand-picks, pays for, and delivers the order to the customer's doorstep. Essentially, Instacart acts as a middleman, providing convenience and time savings for customers by connecting them with local retailers and a gig-economy workforce to handle the shopping and logistics.
 
 ## Objective
 The objective of this analysis is to uncover actionable insights from Instacart’s order and product data to support data-driven business decisions. By analyzing customer purchase patterns, product performance, and ordering behavior, this project aims to identify loyal customers, understand retention trends, and highlight high-performing and underperforming product categories. The findings will help optimize product placement, tailor marketing campaigns, design loyalty offers, and improve customer experience by making the shopping journey more personalized and convenient.
 
-## Dataset
+## Dataset Overview
 The database used in the project is as follows:  
 ``order_products``: Links orders to the products purchased.  
 ``orders``:  Contains order-level data such as order time, day of week, and user ID.  
