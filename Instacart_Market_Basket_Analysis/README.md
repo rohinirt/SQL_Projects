@@ -22,6 +22,8 @@ The database used in the project is as follows:
 ``aisles``: Categories of grocery items (e.g., dairy eggs, beverages, snacks).  
 ``departments``: Higher-level grouping of aisles  
 
+![ER Diagram](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/Screenshot%202025-10-06%20195858.png)  
+
 Find the dataset [here](https://www.kaggle.com/datasets/psparks/instacart-market-basket-analysis)
 
 ## Tools and Techniques
