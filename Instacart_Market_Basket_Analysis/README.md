@@ -232,13 +232,15 @@ ORDER BY order_number;
 **Q11: Most reordered products: products with highest reorder rate (%) excluding low-frequency products (min 100 orders)**
 ``` sql
 SELECT
-  p.product_id,
-  p.product_name,
-  100.0 * SUM(CASE WHEN op.reordered = 1 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0) AS reorder_rate_pct,
-  COUNT(*) AS total_orders
+    d.department,
+    p.product_id,
+    p.product_name,
+    100.0 * SUM(CASE WHEN op.reordered = 1 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0) AS reorder_rate_pct,
+    COUNT(*) AS total_orders
 FROM order_products op
 JOIN products p ON op.product_id = p.product_id
-GROUP BY p.product_id, p.product_name
+JOIN departments d ON p.department_id = d.department_id
+GROUP BY d.department, p.product_id, p.product_name
 HAVING COUNT(*) >= 100
 ORDER BY reorder_rate_pct DESC
 LIMIT 10;
@@ -524,6 +526,56 @@ LIMIT 10;
 ```
 ![](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/Images/20.png)
 
-## Insights
-## Recommendations
-## Conclusion
+## Insights & Recommendations
+### **1. Top Selling Products**  
+**Insight**: The top 10 selling products were **Banana, Bag of Organic Bananas, Organic Strawberries, Organic Baby Spinach, Organic Hass Avocado, Organic Avocado, Large Lemon, Strawberries, Limes, and Organic Whole Milk**. Most of these are **fruits and vegetables**, with **5** inorganic items among them.  
+**Recommendation**: Focus marketing campaigns and promotions on high-demand categories (fruits & vegetables). Ensure consistent stock levels for bananas and avocados, which appear across multiple analyses.
+
+### **2. Order Trends by Day**  
+**Insight**: The highest number of orders occur on **Sunday**, followed by **Monday** and **Tuesday**, with **Thursday** being the least active.  
+**Recommendation**: Launch mid-week discounts or free delivery offers (especially on Thursdays) to balance order distribution throughout the week.
+
+**3. Products Added First to Cart**  
+**Insight**: The top products added first include **Bananas, Bag of Organic Bananas, Organic Whole Milk, Organic Strawberries, Organic Baby Spinach, Organic Avocados, Spring Water, Strawberries, and Organic Raspberries**. Most are organic and overlap with top-selling items, indicating customer preference for healthy and essential products.
+**Recommendation**: Display these items in “Start Your Cart” or “Essentials First” sections to boost engagement and completion rate.
+
+### **4. Average Products per Order**  
+**Insight**: Each order contains an average of **10** unique products.  
+**Recommendation**: Use product bundling (e.g., fruit smoothie packs, meal kits) to increase average basket size and encourage variety.
+
+**5. Average Unique Products per Customer**  
+**Insight**: Each customer purchases an average of **64** unique products during their lifetime, suggesting moderate diversity in shopping habits.  
+**Recommendation**: Utilize personalized recommendations to re-engage customers with products they haven’t purchased recently.
+
+### **6. Customer Retention**  
+**Insight**: Around 23,986 customers stop ordering after **5** purchases, indicating early-stage churn.  
+**Recommendation**: Implement loyalty incentives or “win-back” email campaigns after the 4th or 5th order to improve retention rates.
+
+### **7. Reorder Rate by Cart Position**  
+**Insight**: Products in cart positions **1–5** show the highest reorder rate **(65.5%)**, followed by positions **6–10 (57.7%)**, and positions above **10 (50%)**.  
+**Recommendation**: Place new or high-margin products early in the recommendation list to boost reorder chances.
+
+### **8. Peak Order Hours**  
+**Insight**: On **Sundays** (the busiest day), peak order hours are between **1 PM** and **3 PM.**  
+**Recommendation**: Optimize delivery slots and staff allocation during these hours to ensure smooth operations and quick deliveries.
+
+### **9. Most Reordered Products**  
+**Insight**: Top reordered products include **Chocolate Love Bar, Maca Buttercups, Benchbreak Chardonnay, Fragrance-Free Clay, and Thousand Island Salad Snax.**  
+**Recommendation**: Promote these items in “Buy Again” or “Top Reorders” sections to encourage recurring sales.
+
+### **10. Frequently Bought Together**  
+**Insight**: Commonly co-purchased products include Bananas & Avocados, Strawberries & Bananas, Baby Spinach & Bananas.  
+Most pairs are fruit combinations, reflecting consumer interest in healthy meal pairings.  
+**Recommendation**: Implement a “Frequently Bought Together” feature or create combo offers such as “Smoothie Packs”.
+
+### **11. High-Reorder Customers**  
+**Insight**: About **12%** of customers have a reorder rate above **70%**, representing the most loyal segment.  
+**Recommendation**: Reward these loyal customers through exclusive deals, early sale access, or referral bonuses.
+
+### **12. Top Customers by Lifetime Value**  
+**Insight**: High-value customers tend to purchase from five or more departments, indicating that diversity of choice drives retention.  
+**Recommendation**: Encourage cross-department shopping through product recommendations like “People who bought from Dairy also bought Fresh Fruits.”
+
+### **13. Department-Level Insights**  
+**Insight**: Fresh Fruits and Fresh Vegetables contribute to nearly 20% of total orders, whereas Bakery items account for just **1.8%.**  
+**Recommendation**: Strengthen supplier partnerships for high-performing departments. Offer promotions and visibility boosts for low-performing ones like Bakery.
