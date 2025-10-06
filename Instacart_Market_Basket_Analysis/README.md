@@ -547,7 +547,7 @@ LIMIT 10;
 **Insight**: The highest number of orders occur on **Sunday**, followed by **Monday** and **Tuesday**, with **Thursday** being the least active.  
 **Recommendation**: Launch mid-week discounts or free delivery offers (especially on Thursdays) to balance order distribution throughout the week.
 
-**3. Products Added First to Cart**  
+### **3. Products Added First to Cart**  
 **Insight**: The top products added first include **Bananas, Bag of Organic Bananas, Organic Whole Milk, Organic Strawberries, Organic Baby Spinach, Organic Avocados, Spring Water, Strawberries, and Organic Raspberries**. Most are organic and overlap with top-selling items, indicating customer preference for healthy and essential products.
 **Recommendation**: Display these items in “Start Your Cart” or “Essentials First” sections to boost engagement and completion rate.
 
@@ -555,7 +555,7 @@ LIMIT 10;
 **Insight**: Each order contains an average of **10** unique products.  
 **Recommendation**: Use product bundling (e.g., fruit smoothie packs, meal kits) to increase average basket size and encourage variety.
 
-**5. Average Unique Products per Customer**  
+### **5. Average Unique Products per Customer**  
 **Insight**: Each customer purchases an average of **64** unique products during their lifetime, suggesting moderate diversity in shopping habits.  
 **Recommendation**: Utilize personalized recommendations to re-engage customers with products they haven’t purchased recently.
 
