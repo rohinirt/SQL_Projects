@@ -6,7 +6,7 @@
 4) [Tools and Techniques](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#tools-and-techniques)
 5) [Project Structure](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#project-structure)
 6) [Insights and Recommendations](https://github.com/rohinirt/SQL_Projects/tree/main/Instacart_Market_Basket_Analysis#insights--recommendations)
-7) [Conclusion](
+7) [Conclusion](https://github.com/rohinirt/SQL_Projects/blob/main/Instacart_Market_Basket_Analysis/README.md#conclusion)
 
 ## Introduction
 Instacart is an on-demand grocery and household goods delivery and pickup services from a variety of retailers. The process is driven by its app, where customers select items from local stores and a personal shopper, who is an independent contractor, then hand-picks, pays for, and delivers the order to the customer's doorstep. Essentially, Instacart acts as a middleman, providing convenience and time savings for customers by connecting them with local retailers and a gig-economy workforce to handle the shopping and logistics.
