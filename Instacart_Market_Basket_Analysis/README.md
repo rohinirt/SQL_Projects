@@ -7,11 +7,11 @@ The objective of this analysis is to uncover actionable insights from Instacart�
 
 ## Dataset
 The database used in the project is as follows:  
-``order_products`` Links orders to the products purchased.  
-``orders`` Contains order-level data such as order time, day of week, and user ID.  
-``products``	Product-level details including aisle and department.  
-``aisles``	Categories of grocery items (e.g., dairy eggs, beverages, snacks). 
-``departments``	Higher-level grouping of aisles  
+``order_products``: Links orders to the products purchased.  
+``orders``:  Contains order-level data such as order time, day of week, and user ID.  
+``products``: Product-level details including aisle and department.  
+``aisles``: Categories of grocery items (e.g., dairy eggs, beverages, snacks).  
+``departments``: Higher-level grouping of aisles  
 
 Find the dataset [here](https://www.kaggle.com/datasets/psparks/instacart-market-basket-analysis)
 
@@ -20,7 +20,7 @@ Find the dataset [here](https://www.kaggle.com/datasets/psparks/instacart-market
 **Querying Tool**: pgAdmin4
 
 ## Project Structure
-**1) Database Creation**
+### 1) Database Creation
 - Created Instacard_db database and required tables inside it
 
 ``` sql  
@@ -62,55 +62,15 @@ CREATE TABLE order_products (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 ```
-**2) Data Cleaning**  
+### 2) Data Cleaning
 - All tables were checked for null or duplicate values
 - There was no missing vlues in important columns and no duplicate record found
 
-**3) Data Analysis**
+### 3) Data Analysis
 20 Business questions were solved to performa analysis and find actionable insights
-CREATE TABLE departments (
-department_id INTEGER  primary key,
-department text
-);
 
-create table aisles (
-aisle_id integer primary key,
-aisle text
-);
-
-create table products (
-product_id integer primary key,
-product_name text,
-aisle_id integer,
-department_id integer,
-foreign key (aisle_id) references aisles(aisle_id),
-foreign key (department_id) references public.departments(department_id)
-);
-
-create table orders (
-order_id integer primary key,
-user_id integer not null,
-eval_set varchar(10),
-order_number integer,
-order_dow smallint,
-order_hour_of_day smallint,
-day_since_prior_order numeric
-);
-
-create table order_products (
-order_id integer,
-product_id integer,
-add_to_cart_order integer,
-reordered smallint,
-foreign key (order_id) references orders(order_id),
-foreign key (product_id) references products (product_id)
-);
-
--- ===============================================================
--- BASIC / EXPLORATORY (easy) -- daily / product frequency & simple KPIs
--- ===============================================================
-
--- Q1: WHich are the top 10 selling products?
+**Q1: WHich are the top 10 selling products?**
+``` sql
 SELECT
   p.product_name,
   COUNT(op.product_id) AS total_orders
@@ -119,16 +79,20 @@ JOIN products p ON op.product_id = p.product_id
 GROUP BY p.product_name
 ORDER BY total_orders DESC
 LIMIT 10;
+```
 
--- Q2: Is there a pattern in orders throughout the week? Which days are popular for orders?
+**Q2: Is there a pattern in orders throughout the week? Which days are popular for orders?**
+``` sql
 SELECT
   order_dow AS day_of_week,
   COUNT(order_id) AS total_orders
 FROM orders
 GROUP BY order_dow
 ORDER BY total_orders DESC;
+```
 
--- Q3: What are the top products most commonly added to the cart first?
+**Q3: What are the top products most commonly added to the cart first?**
+``` sql
 SELECT
   p.product_name,
   COUNT(op.order_id) AS frequency
@@ -138,8 +102,10 @@ WHERE op.add_to_cart_order = 1
 GROUP BY p.product_name
 ORDER BY frequency DESC
 LIMIT 10;
+```
 
--- Q4: How many unique products are typically included in a single order?
+**Q4: How many unique products are typically included in a single order?**
+``` sql
 SELECT
   ROUND(AVG(products), 2) AS avg_unique_products
 FROM (
@@ -150,8 +116,10 @@ FROM (
   JOIN order_products op ON o.order_id = op.order_id
   GROUP BY o.order_id
 ) AS order_summary;
+```
 
--- Q5: What is the average “product diversity” (distinct products bought) per customer?
+**Q5: What is the average “product diversity” (distinct products bought) per customer?**
+``` sql
 WITH unique_products AS (
   SELECT
     o.user_id,
@@ -166,13 +134,10 @@ SELECT
   MIN(products) AS min_products,
   MAX(products) AS max_products
 FROM unique_products;
+```
 
--- ===============================================================
--- INTERMEDIATE (medium) -- customer lifecycle, cart behavior, peak hours
--- ===============================================================
-
--- Q6:For each customer, calculate their first and last order number, total number of orders placed, and average days between orders.
--- Then, identify the top 10 customers with the highest total orders
+**Q6:For each customer, calculate their first and last order number, total number of orders placed, and average days between orders.Then, identify the top 10 customers with the highest total orders**
+``` sql
 SELECT 
     user_id,
     MIN(order_number) AS first_order_number,
@@ -184,9 +149,10 @@ WHERE day_since_prior_order IS NOT NULL
 GROUP BY user_id
 ORDER BY total_orders DESC
 LIMIT 10;
+```
 
-
--- Q7: Inactive customers: Identify customers who stopped ordering after fewer than 5 orders
+**Q7: Inactive customers: Identify customers who stopped ordering after fewer than 5 orders**
+``` sql
 WITH customers AS (
   SELECT
     user_id
@@ -197,8 +163,9 @@ WITH customers AS (
 SELECT
   COUNT(user_id) AS customers_with_fewer_than_5_orders
 FROM customers;
-
--- Q8: Calculate the products reorder rate by cart position bucket (1–5, 6–10, >10)
+```
+**Q8: Calculate the products reorder rate by cart position bucket (1–5, 6–10, >10)** 
+``` sql
 SELECT
   CASE
     WHEN add_to_cart_order BETWEEN 1 AND 5 THEN '1-5'
@@ -209,8 +176,10 @@ SELECT
 FROM order_products
 GROUP BY cart_position_bucket
 ORDER BY cart_position_bucket;
+```
 
--- Q9: Peak order hours: For each day of week, find the top 3 hours with maximum order volume
+**Q9: Peak order hours: For each day of week, find the top 3 hours with maximum order volume**
+``` sql
 WITH peak_hours AS (
   SELECT
     order_dow,
@@ -227,8 +196,10 @@ SELECT
 FROM peak_hours
 WHERE hour_rank <= 3
 ORDER BY order_dow, orders DESC;
+```
 
--- Q10: Basket size trend: calculate average basket size (distinct products) by order_number
+**Q10: Basket size trend: calculate average basket size (distinct products) by order_number**
+``` sql
 WITH basket_sizes AS (
   SELECT
     o.user_id,
@@ -245,8 +216,10 @@ SELECT
 FROM basket_sizes
 GROUP BY order_number
 ORDER BY order_number;
+```
 
--- Q11: Most reordered products: products with highest reorder rate (%) excluding low-frequency products (min 100 orders)
+**Q11: Most reordered products: products with highest reorder rate (%) excluding low-frequency products (min 100 orders)**
+``` sql
 SELECT
   p.product_id,
   p.product_name,
@@ -258,8 +231,10 @@ GROUP BY p.product_id, p.product_name
 HAVING COUNT(*) >= 100
 ORDER BY reorder_rate_pct DESC
 LIMIT 10;
+```
 
--- Q12: Find the top product pairs that are ordered together frequently
+**Q12: Find the top product pairs that are ordered together frequently***
+``` sql
 WITH total_orders AS (
   SELECT COUNT(DISTINCT order_id) AS total_orders
   FROM order_products
@@ -288,8 +263,10 @@ LEFT JOIN products pa ON pa.product_id = pc.product_a
 LEFT JOIN products pb ON pb.product_id = pc.product_b
 ORDER BY pc.pair_order_count DESC
 LIMIT 10;
+```
 
--- (Alternative/efficient) Q12b: Top product pairs using array aggregation + generate_subscripts
+(Alternative/efficient) Q12b: Top product pairs using array aggregation + generate_subscripts
+``` sql
 WITH order_product_arrays AS (
   SELECT
     order_id,
@@ -330,15 +307,13 @@ LEFT JOIN products pa ON pa.product_id = pc.product_a
 LEFT JOIN products pb ON pb.product_id = pc.product_b
 ORDER BY pc.pair_order_count DESC
 LIMIT 10;
+```
 
--- ===============================================================
--- ADVANCED (hard) -- RFM-like, loyalty, ranking, pair transitions
--- ===============================================================
-
--- Q13: find the RFM-like segmentation
--- Recency = last order_number (higher means more recent),
--- Frequency = total orders,
--- Monetary = average basket size (distinct products per order)
+**Q13: Calculate the RFM segmentation of users
+Recency = last order_number (higher means more recent),
+Frequency = total orders,
+Monetary = average basket size (distinct products per order)**
+``` sql
 WITH ppo AS (
   SELECT
     o.order_id,
@@ -365,8 +340,10 @@ SELECT
 FROM user_rfm
 ORDER BY frequency DESC
 LIMIT 20;
+```
 
--- Q14: Customer loyalty distribution: Find the % of users whose reorder_rate > 70%
+**Q14: Customer loyalty distribution: Find the % of users whose reorder_rate > 70%**
+``` sql
 WITH user_products AS (
   SELECT
     o.user_id,
@@ -396,8 +373,10 @@ SELECT
   ROUND(100.0 * u.users_count::numeric / NULLIF(t.total_users, 0), 4) AS pct_of_users_over_70
 FROM users_over_70 u
 CROSS JOIN total_users t;
+```
 
--- Q15: Product reorder ranking: top 5 products by reorder probability within each department
+**Q15: Product reorder ranking: top 5 products by reorder probability within each department**
+``` sql
 WITH product_rank AS (
   SELECT
     d.department,
@@ -415,10 +394,12 @@ SELECT
   ROUND(reorder_rate_pct, 2) AS reorder_rate_pct,
   rnk
 FROM product_rank
-WHERE rnk <= 5
+WHERE rnk <= 3
 ORDER BY department, rnk;
+```
 
--- Q16: Calculate top 10% customers by lifetime volume by total products ordered per user
+**Q16: Calculate top 10% customers by lifetime volume by total products ordered per user**
+``` sql
 WITH user_volume AS (
   SELECT
     o.user_id,
@@ -440,8 +421,10 @@ SELECT
 FROM user_percentile
 WHERE pct_rank_asc >= 0.90 
 ORDER BY total_products DESC;
+```
 
--- Q17: Find customers who buy from more than 5 different departments in a single order
+**Q17: Find customers who buy from more than 5 different departments in a single order**
+``` sql
 WITH product_dept AS (
   SELECT
     o.user_id,
@@ -464,8 +447,10 @@ SELECT DISTINCT user_id, order_id, dept_count
 FROM orders_dept
 ORDER BY dept_count DESC
 LIMIT 100;
+```
 
---Q18: Is there any difference in orders in Organic and Inorganic products?
+**Q18: Is there any difference in orders in Organic and Inorganic products?**
+``` sql
 WITH product_type AS (
   SELECT
     op.order_id,
@@ -482,8 +467,10 @@ SELECT
 FROM product_type
 GROUP BY product_type
 ORDER BY total_product_orders DESC;
+```
 
--- Q19: Which Aiscles are most pouplar among frequent customers?
+**Q19: Which Aiscles are most pouplar among frequent customers?**
+``` sql
 WITH customer_orders AS (
     SELECT user_id, COUNT(order_id) AS total_orders
     FROM orders
@@ -501,8 +488,10 @@ JOIN aisles a ON p.aisle_id = a.aisle_id
 GROUP BY a.aisle
 ORDER BY total_orders_by_loyal_customers DESC
 LIMIT 10;
+```
 
--- Q20. What percentage of total orders does each aisle contribute?
+**Q20. What percentage of total orders does each aisle contribute?**
+``` sql
 SELECT 
     a.aisle,
     ROUND(100.0 * COUNT(op.product_id) / 
@@ -513,11 +502,8 @@ JOIN aisles a ON p.aisle_id = a.aisle_id
 GROUP BY a.aisle
 ORDER BY percent_of_total_orders DESC
 LIMIT 10;
+```
 
-
-
-
-
-
-
-
+## Insights
+## Recommendations
+## Conclusion
